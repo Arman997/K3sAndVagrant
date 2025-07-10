@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
         master.vm.network "private_network", ip: '192.168.56.110'
         master.vm.hostname = "master"
         master.vm.provider 'virtualbox' do |vb|
-            vb.memory = 512
+            vb.memory = 1024
             vb.cpus = 1
             vb.gui = false
         end
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
         worker.vm.network "private_network", ip: "192.168.56.111"
         worker.vm.hostname = 'worker1'
         worker.vm.provider "virtualbox" do |vb|
-            vb.memory = 512
+            vb.memory = 1024
             vb.cpus = 1
             vb.gui = false
         end
