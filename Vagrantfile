@@ -4,11 +4,11 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "master" do |master|
         master.vm.box = 'bento/ubuntu-22.04'
-        master.vm.network "private_network", ip: '192.168.33.20'
+        master.vm.network "private_network", ip: '192.168.56.110'
         master.vm.hostname = "master"
         master.vm.provider 'virtualbox' do |vb|
-            vb.memory = 1024
-            vb.cpus = 2
+            vb.memory = 512
+            vb.cpus = 1
             vb.gui = false
         end
         master.vm.provision "shell", inline: <<-SHELL
@@ -20,10 +20,10 @@ Vagrant.configure("2") do |config|
     end
     config.vm.define "worker1" do |worker|
         worker.vm.box = "bento/ubuntu-22.04"
-        worker.vm.network "private_network", ip: "192.168.33.30"
+        worker.vm.network "private_network", ip: "192.168.56.111"
         worker.vm.hostname = 'worker1'
         worker.vm.provider "virtualbox" do |vb|
-            vb.memory = 1024
+            vb.memory = 512
             vb.cpus = 1
             vb.gui = false
         end
@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
                 echo "⏳ Waiting for master to be ready..."
                 sleep 30
                 TOKEN=$(cat /shared/node-token)
-                curl -sfL https://get.k3s.io | K3S_URL=https://192.168.33.20:6443 K3S_TOKEN=$TOKEN sh -s - agent --node-name worker1
+                curl -sfL https://get.k3s.io | K3S_URL=https://192.168.56.110:6443 K3S_TOKEN=$TOKEN sh -s - agent --node-name worker1
             SHELL
       end        
 end
