@@ -50,15 +50,15 @@ vagrant ssh master
 - Then run the following command:
 
 ```bash
-sudo k3s kubectl get nodes
+sudo k3s kubectl get nodes -o wide
 ```
 
 - You should see something like this:
 
 ```pgsql
-NAME      STATUS   ROLES                  AGE   VERSION
-master    Ready    control-plane,master   3m    v1.32.6+k3s1
-worker1   Ready    <none>                 1m    v1.32.6+k3s1
+NAME      STATUS   ROLES                  AGE   VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+master    Ready    control-plane,master   19m   v1.32.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-133-generic   containerd://2.0.5-k3s1.32
+worker1   Ready    <none>                 15m   v1.32.6+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   5.15.0-133-generic   containerd://2.0.5-k3s1.32
 ```
 
 ### 5. To stop and remove all VMs:
